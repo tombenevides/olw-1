@@ -11,11 +11,6 @@ jobs:
       - uses: actions/checkout@v2
         name: Checkout
 
-      - name: Compiling assets
-        run: |
-          npm install
-          npm run build
-
       - name: Configure PHP
         uses: shivammathur/setup-php@v2
         with:
@@ -24,7 +19,12 @@ jobs:
 
       - name: Installing Composer dependencies
         run: |
-          composer install --no-interaction --prefer-dist
+          composer install --no-dev --no-interaction --prefer-dist
+
+      - name: Compiling assets
+        run: |
+          npm install
+          npm run build
 
       - name: Generate deployment artifact
         run: tar -czf ${{ github.sha }}.tar.gz --exclude=*.git --exclude=node_modules --exclude=tests *
