@@ -15,7 +15,7 @@ jobs:
         run: npm ci
 
       - name: Build assets
-        run: npm run prod
+        run: npm run build
 
       - name: Configure PHP
         uses: shivammathur/setup-php@v2
