@@ -79,7 +79,7 @@ jobs:
         uses: appleboy/ssh-action@master
         env:
           RELEASE_PATH: /home/ubuntu/project/releases/${{ github.sha }}
-          ACTIVE_RELEASE_PATH: /home/ubuntu/project/current
+          ACTIVE_RELEASE_PATH: /var/www/html/current
           STORAGE_PATH: /home/ubuntu/project/storage
           BASE_PATH: /home/ubuntu/project
           LARAVEL_ENV: ${{ secrets.PROD_LARAVEL_ENV }}
@@ -103,7 +103,7 @@ jobs:
       - name: Run scripts
         uses: appleboy/ssh-action@master
         env:
-          ACTIVE_RELEASE_PATH: /home/ubuntu/project/current
+          ACTIVE_RELEASE_PATH: /var/www/html/current
         with:
           host: ${{ secrets.SSH_HOST }}
           username: ${{ secrets.SSH_USERNAME }}
