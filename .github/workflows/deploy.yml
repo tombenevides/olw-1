@@ -68,7 +68,8 @@ jobs:
             tar -xzf /home/ubuntu/project/artifacts/${{ github.sha }}.tar.gz -C /home/ubuntu/project/releases/${{ github.sha }}
             mkdir -p /home/ubuntu/project/storage/{app,public,framework,logs}
             mkdir -p /home/ubuntu/project/storage/framework/{cache,sessions,testing,views}
-            chmod -R 0755 /home/ubuntu/project/storage
+            chmod -R 755 /home/ubuntu/project/storage
+            chmod -R 755 /home/ubuntu/project/releases/${{ github.sha }}/bootstrap
 
   activate-release:
     name: Activate release
@@ -112,9 +113,10 @@ jobs:
           envs: ACTIVE_RELEASE_PATH
           script: |
             cd $ACTIVE_RELEASE_PATH
-            php artisan migrate
+            php artisan migrate --force
             php artisan config:cache
             php artisan optimize:clear
+            composer dump-autoload
             echo "Deployed!"
 
   clean-up:
