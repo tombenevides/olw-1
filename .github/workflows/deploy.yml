@@ -68,11 +68,8 @@ jobs:
             tar -xzf /home/ubuntu/project/artifacts/${{ github.sha }}.tar.gz -C /home/ubuntu/project/releases/${{ github.sha }}
             mkdir -p /home/ubuntu/project/storage/{app,public,framework,logs}
             mkdir -p /home/ubuntu/project/storage/framework/{cache,sessions,testing,views}
-            sudo chmod -R 755 /home/ubuntu/project/storage
-            sudo chown -R ubuntu:ubuntu /home/ubuntu/project/storage
-            sudo chmod -R 755 /home/ubuntu/project/releases/${{ github.sha }}/bootstrap
-            sudo chown -R ubuntu:ubuntu /home/ubuntu/project/releases/${{ github.sha }}/bootstrap
-
+            chmod -R 0775 /home/ubuntu/project/storage
+            chmod -R 0775 /home/ubuntu/project/releases/${{ github.sha }}/bootstrap
 
   activate-release:
     name: Activate release
