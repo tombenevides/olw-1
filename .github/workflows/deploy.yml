@@ -69,7 +69,10 @@ jobs:
             mkdir -p /home/ubuntu/project/storage/{app,public,framework,logs}
             mkdir -p /home/ubuntu/project/storage/framework/{cache,sessions,testing,views}
             chmod -R 755 /home/ubuntu/project/storage
+            chown -R ubuntu:ubuntu /home/ubuntu/project/storage
             chmod -R 755 /home/ubuntu/project/releases/${{ github.sha }}/bootstrap
+            chown -R ubuntu:ubuntu /home/ubuntu/project/releases/${{ github.sha }}/bootstrap
+
 
   activate-release:
     name: Activate release
